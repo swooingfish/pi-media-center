@@ -118,7 +118,7 @@ Use the contents of couchpotato
 
 (This assumes that you'll be storing the files to an external USB harddrive, plugged into the Pi's USB)
 
-We're going to mount the drive to /var/mulltimedia
+We're going to mount the drive to /var/multimedia
 
       sudo mkdir -p /var/multimedia/
       sudo mount -t vfat -o uid=pi,gid=pi /dev/sda1 /var/multimedia/
