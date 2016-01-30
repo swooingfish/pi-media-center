@@ -153,7 +153,8 @@ Test it out at [IP ADDRESS]:5050 and Ctrl+C when you're done
 
 ## Deluge 
 
-http://www.howtogeek.com/142044/how-to-turn-a-raspberry-pi-into-an-always-on-bittorrent-box/
+Instrucitons for setting up Deluge
+Source : http://www.howtogeek.com/142044/how-to-turn-a-raspberry-pi-into-an-always-on-bittorrent-box/
 
 Setting up Deluge for ThinClient Access. 
 
@@ -216,9 +217,6 @@ It’s a fresh install, nary a .torrent in site, but our connection between the 
 Go ahead and configure the WebUI now (if you wish to do so), or skip down to the proxy setup portion of the tutorial.
 
 ### Setting up Deluge for WebUI Access
-
-Instrucitons for setting up Deluge
-Source : http://www.howtogeek.com/142044/how-to-turn-a-raspberry-pi-into-an-always-on-bittorrent-box/
 
 Configuring the WebUI is significantly faster but, as we mentioned before, you’ll have access to less features than with the full ThinClient experience. One of the most useful features you gain from using the ThinClient, associating .torrent files with the Deluge ThinClient for automatic transfer to the remote Deluge daemon, is missing from the WebUI experience.
 
