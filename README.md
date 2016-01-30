@@ -20,7 +20,7 @@ password: raspberry
 
       sudo apt-get -y install git
 
-      sudo apt-get -y install python2.6 python-cheetah python-openssl par2
+      sudo apt-get -y install python-gdbm python-cheetah python-openssl par2
 
       sudo sh -c "echo \"deb-src http://mirrordirector.raspbian.org/raspbian/ wheezy main contrib non-free rpi\" >> /etc/apt/sources.list"
       sudo apt-get update
