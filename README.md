@@ -16,7 +16,7 @@ Follow instructions
 
 ## Install dependencies
 
-      sudo apt-get -y install git python-gdbm python-cheetah python-openssl par2 samba mysql-server unrar
+      sudo apt-get -y install git python-gdbm python-cheetah python-openssl par2 samba unrar
 
 ## Setup Samba file server
 
@@ -43,7 +43,26 @@ Add a samba user called "osmc".
       
 You should now be able to access the fileserver via smb://osmc on a mac or start and run \\osmc on a PC.
 
-## Configure MySQL Server to save your library data
+## Setup MySQL Server
+
+Install the mysql server
+
+	sudo apt-get install mysql-server
+	
+When the installation pormps for a root password it's always a good idea to set one
+
+Once the mysql server is installed connect using the mysql command and the root user and any password you might have set on installation.
+
+	mysql -u root -p
+
+Create mysql user, changing db_user and db_password to what ever you want to have.
+
+	CREATE USER 'db_user'@'%' IDENTIFIED BY 'db_password';
+	GRANT ALL PRIVILEGES ON *.* TO 'db_user'@'%';
+	FLUSH PRIVILEGES;
+
+
+## Configure OSMC to use the MySQL Server to save your library data
 
 This will allow us to share the current watched progress of your library accorss the network to other OSMC devices e.g. if they are in differnet locations. It will also allow us to eaisally backup the database with automysqlbackup
 
@@ -131,6 +150,12 @@ Test it out at [IP ADDRESS]:8081 and Ctrl+C when you're done
 
 Test it out at [IP ADDRESS]:5050 and Ctrl+C when you're done
 
+
+## Deluge 
+
+http://www.howtogeek.com/142044/how-to-turn-a-raspberry-pi-into-an-always-on-bittorrent-box/
+
+
 ## Autostarts
 
 (You'll find the contents of each autostart script in the /startups folder)
@@ -169,6 +194,7 @@ Use the contents of couchpotato
       sudo update-rc.d couchpotato defaults
 
       sudo /etc/init.d/couchpotato start
+
 
 ## Storage
 
