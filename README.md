@@ -287,6 +287,21 @@ Use the contents of couchpotato
 
       sudo /etc/init.d/couchpotato start
 
+### Deluge
+
+	sudo nano /etc/default/deluge-daemon
+	
+Use the contents of deluge-daemon.conf
+
+	sudo chmod 755 /etc/default/deluge-daemon
+	
+
+	sudo nano /etc/init.d/deluge-daemon
+
+Use the contents of deluge-daemon.sh
+     
+	sudo chmod 755 /etc/init.d/deluge-daemon
+	sudo update-rc.d deluge-daemon defaults
 
 ## Storage
 
