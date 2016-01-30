@@ -1,15 +1,11 @@
 # Raspbery Pi media center setup
 
-## RaspBMC installation
+This will install a OSMC media center on your raspberry pi. The current distro of OSMC is running debian jessie.
 
-With formatted SD card in Mac
+## OSMC installation
 
-
-      curl -O http://svn.stmlabs.com/svn/raspbmc/release/installers/python/install.py
-      chmod +x install.py
-
-
-      sudo python install.py
+With formatted SD card download osmc install or image and write to the SD card 
+https://osmc.tv/download/
 
 Follow instructions
 
@@ -18,24 +14,21 @@ Follow instructions
 ssh pi@[ip-address]
 password: raspberry
 
-      sudo apt-get -y install git
+      sudo apt-get -y install git python-gdbm python-cheetah python-openssl par2 samba mysql-server unrar
 
-      sudo apt-get -y install python-gdbm python-cheetah python-openssl par2
+## Configure OSMC to use the MySQL Server to save your library and music data
 
-      sudo sh -c "echo \"deb-src http://mirrordirector.raspbian.org/raspbian/ wheezy main contrib non-free rpi\" >> /etc/apt/sources.list"
-      sudo apt-get update
-      sudo apt-get -y build-dep unrar-nonfree
-      sudo apt-get source -b unrar-nonfree
-      sudo dpkg -i unrar*.deb
+This will allow us to share the current watched progress of your library accorss the network to other OSMC devices e.g. if they are in differnet locations. It will also allow us to eaisally backup the database with automysqlbackup
+
 
 ## NZB installation
 
       sudo addgroup nzb
       sudo useradd --system --user-group --no-create-home --groups nzb sabnzbd
 
-      wget http://downloads.sourceforge.net/project/sabnzbdplus/sabnzbdplus/0.7.3/SABnzbd-0.7.3-src.tar.gz
-      tar xzf SABnzbd-0.7.3-src.tar.gz
-      sudo mv SABnzbd-0.7.3 /usr/local/sabnzbd
+      wget http://downloads.sourceforge.net/project/sabnzbdplus/sabnzbdplus/0.7.20/SABnzbd-0.7.20-src.tar.gz
+      tar xzf SABnzbd-0.7.20-src.tar.gz
+      sudo mv SABnzbd-0.7.20 /usr/local/sabnzbd
       sudo chown -R sabnzbd:nzb /usr/local/sabnzbd
 
       sudo mkdir /var/sabnzbd
