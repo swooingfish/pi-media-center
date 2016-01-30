@@ -18,7 +18,32 @@ Follow instructions
 
       sudo apt-get -y install git python-gdbm python-cheetah python-openssl par2 samba mysql-server unrar
 
-## Configure OSMC to use the MySQL Server to save your library and music data
+## Setup Samba file server
+
+Samba is a network file server so you can access the media files on your network though differnet devices. 
+
+      sudo nano /etc/samba/smbd.conf
+      
+Around line number 193 (press CRTL + C) to check the current line number, change “read only” to from yes to no.
+
+      [homes]
+      comment = Home Directories
+      browseable = no  
+      # By default, the home directories are exported read-only. Change the
+      # next parameter to 'no' if you want to be able to write to them.
+      read only = no
+ 
+Restart the samba service
+ 
+      sudo service smbd start
+
+Add a samba user called "osmc".
+
+      sudo smbpasswd -a osmc
+      
+You should now be able to access the fileserver via smb://osmc on a mac or start and run \\osmc on a PC.
+
+## Configure MySQL Server to save your library data
 
 This will allow us to share the current watched progress of your library accorss the network to other OSMC devices e.g. if they are in differnet locations. It will also allow us to eaisally backup the database with automysqlbackup
 
