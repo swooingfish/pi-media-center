@@ -155,6 +155,100 @@ Test it out at [IP ADDRESS]:5050 and Ctrl+C when you're done
 
 http://www.howtogeek.com/142044/how-to-turn-a-raspberry-pi-into-an-always-on-bittorrent-box/
 
+Setting up Deluge for ThinClient Access. 
+
+	sudo apt-get install deluged
+	
+	sudo apt-get install deluge-console
+	
+This will download the Deluge daemon and console installation packages and run them. When prompted to continue, type Y. After Deluge has finished installing, we need to run the Deluge daemon. Enter the following commands:
+
+	deluged
+	
+	sudo pkill deluged
+
+This starts the Deluge daemon (which creates a configuration file) and then shuts down the daemon. We’re going to edit that configuration file and then start it back up. Type in the following commands to first make a backup of the original configuration file and then open it for editing:
+
+	cp ~/.config/deluge/auth ~/.config/deluge/auth.old
+	nano ~/.config/deluge/auth
+
+Once inside nano, you’ll need to add a line to the bottom of the configuration file with the following convention:
+
+	user:password:level
+	
+Where in user is the username you want for Deluge, password is the password you want, and the level is 10 (the full-access/administrative level for the daemon). For our purposes, we used pi:raspberry:10.When you’re done editing, hit CTRL+X and save your changes. Once you’ve saved them, start up the daemon again and then the console:
+
+	deluged
+	
+	deluge-console
+
+If starting the console gives you an error code instead of nice cleanly formatted console interface type “exit” and then make sure you’ve started up the daemon.
+
+Once you’re inside the console, we need to make a quick configuration change. Enter the following:
+
+	config -s allow_remote True
+	
+	config allow_remote
+	
+	exit
+
+This enables remote connections to your Deluge daemon and double checks that the config variable has been set. Now it’s time to kill the daemon and restart it one more time so that the config changes take effect:
+
+	sudo pkill deluged
+	
+	deluged
+
+At this point your deluge daemon is ready for remote access. We need to install the Deluge desktop client in order to finish the configuration. Hit up the Deluge Downloads page http://dev.deluge-torrent.org/wiki/Download and select the installer for your operating system. Once you have installed the Deluge desktop client, run it for the first time; we need to make some quick changes.
+
+Once launched, navigate to Preferences -> Interface. Within the interface submenu, you’ll see a check box for “Classic Mode”. By default it is checked. Uncheck it.
+
+Click OK and then restart the Deluge desktop client. This time when Deluge starts, it will present you with the Connection Manager. Here is where you input the information about your Raspberry Pi and the Deluge installation. Click the Add button in the Connection Manger and plug in your Pi’s info like so:
+
+You’ll need to input the IP address of the Raspberry Pi on your network, as well as the username and password you set during the earlier configuration. Leave the port at the default 58846. Click Add.
+
+Back in the Connection Manager, you’ll see the entry for the Raspberry Pi; if all goes well, the indicator light will turn green like so:
+
+Click Connect and you’ll be kicked into the interface, connected to the remote machine:
+
+
+It’s a fresh install, nary a .torrent in site, but our connection between the remote machine and the desktop client is a success!
+
+Go ahead and configure the WebUI now (if you wish to do so), or skip down to the proxy setup portion of the tutorial.
+
+### Setting up Deluge for WebUI Access
+
+Instrucitons for setting up Deluge
+Source : http://www.howtogeek.com/142044/how-to-turn-a-raspberry-pi-into-an-always-on-bittorrent-box/
+
+Configuring the WebUI is significantly faster but, as we mentioned before, you’ll have access to less features than with the full ThinClient experience. One of the most useful features you gain from using the ThinClient, associating .torrent files with the Deluge ThinClient for automatic transfer to the remote Deluge daemon, is missing from the WebUI experience.
+
+To install the WebUI, go to the terminal on your Pi and enter the following commands. Note: If you already installed the Deluge daemon in the ThinClient section of the tutorial, skip the first command here.
+
+
+	sudo apt-get install deluged
+	
+	sudo apt-get install python-mako
+	
+	sudo apt-get install deluge-web
+	
+	deluge-web
+	
+This sequence installs the Deluge daemon (if you didn’t already install it in the last section), Mako (a template gallery for Python that the WebUI needs), the WebUI itself, and then starts the WebUI program.
+
+The default port for the WebUI is 8112; if you wish to change it use the following commands:
+
+	sudo pkill deluge-web
+	
+	nano ~/.config/deluge/web.conf
+
+This stops the WebUI and opens up the configuration file for it. Use nano to edit the line: “port”: 8112, and replace the 8112 with any port number (above 1000, as 1-1000 are reserved by the system).
+
+Once you have the WebUI up and running, it’s time to connect into it using a web browser. You can use a browser on the Pi if you ever need to, but it’s not the most pleasant user experience and best left for emergencies. Open up a browser on your regular desktop machine and point it at the IP address of your Pi (e.g. http://192.168.1.102:8112).
+
+You’ll be greeted with a password prompt (the default password is “deluge) and be immediately encouraged to change it after you enter it for the first time. After that, you’ll be able to interact with Deluge via the lightweight interface:
+
+
+It’s not quite the same as the ThinClient, but it’s robust enough for light use and has the added benefit of serving as the point of connection for lots of torrent-control mobile apps.
 
 ## Autostarts
 
