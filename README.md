@@ -47,6 +47,42 @@ You should now be able to access the fileserver via smb://osmc on a mac or start
 
 This will allow us to share the current watched progress of your library accorss the network to other OSMC devices e.g. if they are in differnet locations. It will also allow us to eaisally backup the database with automysqlbackup
 
+      nano ~/.kodi/userdata/advancedsettings.xml
+       
+Add in the following settings, changing your username and password to what you have set when setting up the mysql server and database user.
+
+	<advancedsettings>
+	  <loglevel hide="true">-1</loglevel> <!-- Disables logging -->
+	  <nodvdrom>true</nodvdrom>
+	  
+	  <videodatabase>
+		<type>mysql</type>
+		<host>localhost</host>
+		<port>3306</port>
+		<user>db_user</user>
+		<pass>db_password</pass>
+	  </videodatabase> 
+	  <musicdatabase>
+		<type>mysql</type>
+		<host>localhost</host>
+		<port>3306</port>
+		<user>db_user</user>
+		<pass>db_password</pass>
+	  </musicdatabase>
+	  <videolibrary>
+		<importwatchedstate>true</importwatchedstate>
+		<importresumepoint>true</importresumepoint>
+	  </videolibrary>
+	  
+	  <network>
+		 <buffermode>1</buffermode> <!-- Default is 1 -->
+		 <cachemembuffersize>52428800</cachemembuffersize> <!-- Default is 20971520 bytes or 20 MB -->
+		 <readbufferfactor>2.0</readbufferfactor> <!-- Default is 1.0 -->
+	  </network>
+
+	</advancedsettings>
+
+
 
 ## NZB installation
 
