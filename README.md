@@ -9,10 +9,12 @@ https://osmc.tv/download/
 
 Follow instructions
 
-## Initial setup
+## Login to the Raspberry pi once it's booted.
 
-ssh pi@[ip-address]
-password: raspberry
+      ssh osmc@[ip-address]
+      password: osmc
+
+## Install dependencies
 
       sudo apt-get -y install git python-gdbm python-cheetah python-openssl par2 samba mysql-server unrar
 
