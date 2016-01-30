@@ -47,7 +47,7 @@ You should now be able to access the fileserver via smb://osmc on a mac or start
 
 Install the mysql server
 
-	sudo apt-get install mysql-server
+	sudo apt-get install -y mysql-server
 	
 When the installation pormps for a root password it's always a good idea to set one
 
@@ -57,12 +57,13 @@ Once the mysql server is installed connect using the mysql command and the root 
 
 Create mysql user, changing db_user and db_password to what ever you want to have.
 
-	CREATE USER 'db_user'@'%' IDENTIFIED BY 'db_password';
-	GRANT ALL PRIVILEGES ON *.* TO 'db_user'@'%';
+	CREATE USER 'db_user' IDENTIFIED BY 'db_password';
+	GRANT ALL ON `MyVideos%`.* TO 'db_user';
+	GRANT ALL ON `MyMusic%`.* TO 'db_user';
 	FLUSH PRIVILEGES;
 
 
-## Configure OSMC to use the MySQL Server to save your library data
+### Configure OSMC to use the MySQL Server to save your library data
 
 This will allow us to share the current watched progress of your library accorss the network to other OSMC devices e.g. if they are in differnet locations. It will also allow us to eaisally backup the database with automysqlbackup
 
